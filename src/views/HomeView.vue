@@ -53,8 +53,9 @@
                   <td>{{ item.phone }}</td>
                   <td>{{ item.email }}</td>
                   <td>
+                    <button type="button"  @click="getEdit(item.id)"  title='Vizualizar o contacto' data-bs-toggle="modal" data-bs-target="#viewContact" class="btn btn-outline-secondary " ><i class="fa fa-eye"></i></button>
                     <button type="button"  @click="getEdit(item.id)"  title='Editar o contacto' data-bs-toggle="modal" data-bs-target="#editContact" class="btn btn-outline-primary " ><i class="fa fa-edit"></i></button>
-                      <button  style="margin-left:5px" @click="getDelete(item.id)"  data-bs-toggle="modal" data-bs-target="#delContact"  title='Eliminar o Contato' type="button" class="btn btn-outline-danger" ><i class="fas fa-times"></i></button>
+                    <button  style="margin-left:5px" @click="getDelete(item.id)"  data-bs-toggle="modal" data-bs-target="#delContact"  title='Eliminar o Contato' type="button" class="btn btn-outline-danger" ><i class="fas fa-times"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -206,6 +207,64 @@
       </div>
     </div>
 
+    <!-- Modal View contact-->
+    <div
+      class="modal fade"
+      id="viewContact"
+      tabindex="-1"
+      aria-labelledby="viewContact"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewContact">
+              <strong> {{ contact.name }}</strong>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3 row">
+
+              <table class="table table-sm">
+                <tbody>
+                  <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ contact.id }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Nome</th>
+                    <td>{{ contact.name }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">E-mail</th>
+                    <td>{{ contact.email }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Contato</th>
+                    <td>{{ contact.phone }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-4">
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  title="Cancelar"
+                  data-bs-dismiss="modal"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Delete contact-->
     <div
       class="modal fade"
@@ -328,14 +387,13 @@ export default {
       this.contact.id = this.contacts[id-1].id
       this.contact.name = this.contacts[id-1].name
       this.contact.phone = this.contacts[id-1].phone
-      this.contact.email = this.contacts[id-1].nome
+      this.contact.email = this.contacts[id-1].email
     },
+
 
     getDelete(id){
       this.contact.id = this.contacts[id-1].id
       this.contact.name = this.contacts[id-1].name
-      this.contact.phone = this.contacts[id-1].phone
-      this.contact.email = this.contacts[id-1].nome
 
       this.index=id-1
     },
